@@ -14,11 +14,10 @@
       const xhr = new XMLHttpRequest()
 
       xhr.open(config.metodo, config.url, true)
-
-      xhr.onload = e => {
-        if (xhr.status === 200) {
-          config.sucesso(xhr.response)
-        } else if (xhr.status >= 400) {
+      xhr.onload = e => {  //function que será executada quando a requisição terminar
+        if (xhr.status === 200) {//verifica  se o status do HTTP é 200 ('Req. bem sucedida')
+          config.sucesso(xhr.response)//req. bem sucedida chama config.sucesso e passa a resposta da requisição
+        } else if (xhr.status >= 400) {//se o status for 400 ou maior significa algum tipo de erro,chama config.erro e informa o n° do status e o texto.
           config.erro({
             codigo: xhr.status,
             texto: xhr.statusText
@@ -26,16 +25,16 @@
         }
       }
 
-      xhr.send()
+      xhr.send() //dispara a requisição feita pelo objeto XMLHttpRequest
     }
 
     // Função para criar tabela
     function criarTabela(estados) {
       const linhas = estados.map(estado => {
-        const tdId = document.createElement('td')
+        const tdId = document.createElement('td')// coluna da linha
         tdId.innerHTML = estado.id
 
-        const tdNome = document.createElement('td')
+        const tdNome = document.createElement('td')//coluna da linha
         tdNome.innerHTML = estado.nome
 
         const tdSigla = document.createElement('td')
