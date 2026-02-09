@@ -30,7 +30,7 @@ app.use(body.json())
 const storage = multer.diskStorage({
     destination: function (req, file, callback) {
         // Usa caminho absoluto para evitar problemas de diretório
-        callback(null, path.resolve(__dirname, './upload')) // define a pasta
+        callback(null, path.resolve(__dirname, 'upload')) // define a pasta
     },
     filename: function (req, file, callback) {  //seleciona o nome
         callback(null, `${Date.now()}_${file.originalname}`)
