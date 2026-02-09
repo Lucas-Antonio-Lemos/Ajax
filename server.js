@@ -21,6 +21,28 @@ app.use(body.json())
 - Exemplo prático: Se o cliente enviar { "nome": "Maria", "idade": 30 } no corpo da requisição, o Express converte isso em um objeto JavaScript acessível em req.body.
 */
 
+const multer=require('multer')
+
+const storage=multer.diskStorage({
+    destination:function (req,file,callback){
+        callback(null,'./upload')//define a pasta
+    },
+    filename:function(req,file,callback){  //seleciona o nome
+        callback(null,`${Date.now()}_${file.originalname}`)
+    }
+})
+
+const upload=multer({storage}).single('arquivo')
+app.post('/upload',(req,res)=>{
+upload(req,res,err =>{
+       if(err){
+        return res.end('Ocorreu um erro')
+    }
+    res.end('Concluído!')
+})
+ 
+})
+
 // app.get('/teste',(req,res)=>res.send(new Date))
 app.listen(8080,()=>console.log(`Executando!...`))
 
