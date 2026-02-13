@@ -50,4 +50,4 @@ app.post('/upload', (req, res) => {
 })
 
 // app.get('/teste',(req,res)=>res.send(new Date))
-app.listen(8080, () => console.log(`Executando ! !`))
+app.listen(8080, () => console.log(`Executando servidor !`))
