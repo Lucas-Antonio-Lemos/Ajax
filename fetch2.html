@@ -22,13 +22,45 @@
 
 <body class="conteudo exercicio">
     <h1>Formulário Via Fetch</h1>
-    <form name="usuarioForm" action="formulario" method="post">
+    <form name="usuarioForm" id="usuarioForm" action="formulario"method="post">
         <input type="text" name="nome" placeholder="Nome..." />
         <input type="text" name="sobrenome" placeholder="Sobrenome..." />
         <button>Salvar</button>
     </form>
     <div id="resultado"></div>
     <script>
-        // ...
+        document.getElementById('usuarioForm').onsubmit=async e =>{ //interceptando a submissão do formulário 
+            e.preventDefault()
+            const form=e.target
+            const data=new FormData(form)
+            data.append('ajax',true)
+
+            const options ={
+                method:form.method,
+                body:new URLSearchParams(data)
+            }
+            const resultado=document.getElementById('resultado')
+
+            // fetch(form.action,options)
+            // .then(resp=>resp.json())
+            // .then(json=>{
+            //     resultado.innerHTML=JSON.stringify(json)
+
+            // })
+            // .catch(e=>{
+            //     resultado.innerHTML=`Problema na url...`
+            // })
+try{
+    const resp=await fetch(form.action,options)
+    const json=await resp.json()
+    resultado.innerHTML=JSON.stringify(json)
+
+}catch(e){
+    resultado.innerHTML=e
+}
+
+        }
+        
     </script>
-</body>
+    
+</body> 
