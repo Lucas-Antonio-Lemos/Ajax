@@ -29,35 +29,45 @@
     </form>
     <div id="resultado"></div>
     <script>
-        document.getElementById('usuarioForm').onsubmit=async e =>{ //interceptando a submissão do formulário 
-            e.preventDefault()
-            const form=e.target
-            const data=new FormData(form)
-            data.append('ajax',true)
+        document.getElementById('usuarioForm').onsubmit=/*async*/ e =>{ //interceptando a submissão do formulário 
+            e.preventDefault() // - Impede o comportamento padrão do formulário (que seria recarregar a página e enviar os dados pelo navegador).
 
-            const options ={
-                method:form.method,
-                body:new URLSearchParams(data)
+            const form=e.target //- e.target é o elemento que disparou o evento, ou seja, o próprio formulário.
+
+           const data=new FormData(form) //- Cria um objeto FormData com todos os campos do formulário (inputs, selects, etc.).
+//- Esse objeto facilita a manipulação dos dados. ** POSSO FAZER DE OUTRA FORMA ? 
+
+            //data.append('ajax',true) //- Adiciona manualmente um campo extra chamado ajax com valor true.
+// Isso pode ser usado no servidor para identificar que a requisição veio via AJAX
+
+
+            const options ={ // O QUE  MAIS POSSO PASSAR PARA ESSE OBJETO ?
+                method:form.method, //-  usa o método definido no formulário (GET ou POST)
+
+                body:new URLSearchParams(data) //-  transforma os dados em formato application/x-www-form-urlencoded (como se fosse um envio tradicional de formulário).
+
             }
             const resultado=document.getElementById('resultado')
 
-            // fetch(form.action,options)
-            // .then(resp=>resp.json())
-            // .then(json=>{
-            //     resultado.innerHTML=JSON.stringify(json)
+            fetch(form.action,options)//- Faz a requisição para a URL definida no atributo action do formulário --- Usa as opções configuradas (method e body)
 
-            // })
-            // .catch(e=>{
-            //     resultado.innerHTML=`Problema na url...`
-            // })
-try{
-    const resp=await fetch(form.action,options)
-    const json=await resp.json()
-    resultado.innerHTML=JSON.stringify(json)
 
-}catch(e){
-    resultado.innerHTML=e
-}
+            .then(resp=>resp.json())
+            .then(json=>{
+                resultado.innerHTML=JSON.stringify(json)
+
+            })
+            .catch(e=>{
+                resultado.innerHTML=`Problema na url...`
+            })
+//try{
+//     const resp=await fetch(form.action,options)
+//     const json=await resp.json()
+//     resultado.innerHTML=JSON.stringify(json)
+
+// }catch(e){
+//     resultado.innerHTML=e
+// }
 
         }
         
