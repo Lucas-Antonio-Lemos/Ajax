@@ -14,6 +14,14 @@
     <div id="post"></div>
 
     <script>
-        // ...
+        function exibir(id,dados){
+            const txt =JSON.stringify(dados)
+            document.getElementById(id).innerHTML=txt
+
+        }
+        axios.get('parOuImpar',{
+            params:10
+
+        }).then(resp=>exibir('get',resp.data))
     </script>
 </body>

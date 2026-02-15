@@ -11,18 +11,15 @@
     <h1>Estados</h1>
     <!--Requisição ao servidor... recebendo dados do servidor-->
     <script>
-const url ='dados/estados.json'
+const url='dados/estados.json'
 fetch(url)
 .then(resp=>resp.json())
 .then(json=>json.map(estados=>estados.nome))
 .then(estados=>{
-    console.log(estados[21])
-
-    const lista =estados.map(nome=> `<li> ${nome} </li>`).join('__________________________________')
-    document.body.insertAdjacentHTML('beforeend',`<ul> ${lista}</ul>`)
-
+    console.log(estados[20])
+    const lista =estados.map(nome=>`<li>${nome}</li>`).join('')
+    document.body.insertAdjacentHTML('beforeend',`<ul> ${lista}</ul> `)
 })
-
 
 
 

@@ -7,11 +7,21 @@
     <link rel='stylesheet' href='css/estilo.css'>
     <script src="js/axios.js"></script>
 </head>
+<!-- axios é uma biblioteca de terceiros-->
 
 <body class="conteudo exercicio">
     <h1>Estados</h1>
 
     <script>
-        // ...
+      //  const url='dados/estados.json'
+axios('dados/estados.json')
+  .then(resp => resp.data.map(e => e.nome)) //dentro de .data= está disponível o que recebi 
+
+  .then(estados => {
+    console.log(estados[20])
+    const lista = estados.map(nome => `<li>${nome}</li>`).join('');
+    document.body.insertAdjacentHTML('beforeend', `<ul>${lista}</ul>`);
+  });
     </script>
 </body>
+
