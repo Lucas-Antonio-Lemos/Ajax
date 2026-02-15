@@ -19,9 +19,13 @@
             document.getElementById(id).innerHTML=txt
 
         }
-        axios.get('parOuImpar',{
-            params:10
-
-        }).then(resp=>exibir('get',resp.data))
+//        axios.get('parOuImpar', {
+//     params: { numero: 22}
+// }).then(resp => exibir('get', resp.data))
+axios('parOuImpar?numero=12').then(resp=>exibir('get',resp.data))
+axios.post('formulario',{
+    nome:'Lucas',
+    id:1
+}).then(resp=>exibir('post',resp.data))
     </script>
 </body>
